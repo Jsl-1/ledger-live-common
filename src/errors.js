@@ -120,3 +120,5 @@ export const SwapNoAvailableProviders = createCustomErrorClass(
 export const SwapExchangeRateOutOfBounds = createCustomErrorClass(
   "SwapExchangeRateOutOfBounds"
 );
+
+export const SwapUnknownSwapId = createCustomErrorClass("SwapUnknownSwapId");
