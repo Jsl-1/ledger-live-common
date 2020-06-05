@@ -292,7 +292,7 @@ export function fromSwapOperationRaw(raw: SwapOperationRaw): SwapOperation {
   return {
     ...raw,
     fromAmount: BigNumber(fromAmount),
-    toAmount: BigNumber(toAmount)
+    toAmount: BigNumber(toAmount),
   };
 }
 
@@ -302,7 +302,7 @@ export function toSwapOperationRaw(so: SwapOperation): SwapOperationRaw {
   return {
     ...so,
     fromAmount: fromAmount.toString(),
-    toAmount: toAmount.toString()
+    toAmount: toAmount.toString(),
   };
 }
 
@@ -317,7 +317,7 @@ export function fromTokenAccountRaw(raw: TokenAccountRaw): TokenAccount {
     creationDate,
     balance,
     balanceHistory,
-    swapHistory
+    swapHistory,
   } = raw;
   const token = getTokenById(tokenId);
   const convertOperation = (op) => fromOperationRaw(op, id);
@@ -334,7 +334,7 @@ export function fromTokenAccountRaw(raw: TokenAccountRaw): TokenAccount {
       raw.operationsCount || (operations && operations.length) || 0,
     operations: (operations || []).map(convertOperation),
     pendingOperations: (pendingOperations || []).map(convertOperation),
-    swapHistory: (swapHistory || []).map(fromSwapOperationRaw)
+    swapHistory: (swapHistory || []).map(fromSwapOperationRaw),
   };
 }
 
@@ -349,7 +349,7 @@ export function toTokenAccountRaw(ta: TokenAccount): TokenAccountRaw {
     pendingOperations,
     balance,
     balanceHistory,
-    swapHistory
+    swapHistory,
   } = ta;
   return {
     type: "TokenAccountRaw",
@@ -361,9 +361,9 @@ export function toTokenAccountRaw(ta: TokenAccount): TokenAccountRaw {
     balanceHistory: toBalanceHistoryRawMap(balanceHistory || {}),
     creationDate: ta.creationDate.toISOString(),
     operationsCount,
-    operations: operations.map(o => toOperationRaw(o)),
-    pendingOperations: pendingOperations.map(o => toOperationRaw(o)),
-    swapHistory: (swapHistory || []).map(toSwapOperationRaw)
+    operations: operations.map((o) => toOperationRaw(o)),
+    pendingOperations: pendingOperations.map((o) => toOperationRaw(o)),
+    swapHistory: (swapHistory || []).map(toSwapOperationRaw),
   };
 }
 
@@ -502,7 +502,7 @@ export function fromAccountRaw(rawAccount: AccountRaw): Account {
     subAccounts: subAccountsRaw,
     tronResources,
     cosmosResources,
-    swapHistory
+    swapHistory,
   } = rawAccount;
 
   const subAccounts =
@@ -607,7 +607,7 @@ export function toAccountRaw({
   endpointConfig,
   tronResources,
   cosmosResources,
-  swapHistory
+  swapHistory,
 }: Account): AccountRaw {
   const res: $Exact<AccountRaw> = {
     id,
